@@ -12,6 +12,8 @@ import BrandDashboardPage from './pages/BrandDashboardPage/BrandDashboardPage.js
 import BriefBuilderPage from './pages/BriefBuilderPage/BriefBuilderPage.jsx';
 import BriefsListPage from './pages/BriefsListPage/BriefsListPage.jsx';
 import BriefDetailPage from './pages/BriefDetailPage/BriefDetailPage.jsx';
+import BriefMatchesPage from './pages/BriefMatchesPage/BriefMatchesPage.jsx';
+
 
 /**
  * Scroll and Hash Manager
@@ -62,6 +64,7 @@ export default function App() {
         <Route path="/briefs" element={<BriefsListPage />} />
         <Route path="/briefs/new" element={<BriefBuilderPage />} />
         <Route path="/briefs/:id" element={<BriefDetailPage />} />
+        <Route path="/dashboard/brand/briefs/:id/matches" element={<BriefMatchesPage />} />
       </Routes>
       <Footer />
     </AuthProvider>

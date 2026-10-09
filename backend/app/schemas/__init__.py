@@ -37,6 +37,12 @@ from app.schemas.recommendation import (
     RecommendedCreator,
     RecommendationResponse,
 )
+from app.schemas.matching import (
+    ScoreBreakdown,
+    RelevantPortfolioItem,
+    CreatorMatch,
+    MatchResponse,
+)
 
 __all__ = [
     "RoleEnum",
@@ -72,4 +78,8 @@ __all__ = [
     "CreatorSummary",
     "RecommendedCreator",
     "RecommendationResponse",
+    "ScoreBreakdown",
+    "RelevantPortfolioItem",
+    "CreatorMatch",
+    "MatchResponse",
 ]

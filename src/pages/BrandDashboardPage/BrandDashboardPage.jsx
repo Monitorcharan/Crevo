@@ -428,6 +428,13 @@ export default function BrandDashboardPage() {
                               {isSelected ? 'Viewing Applicants' : 'View Applicants'}
                             </button>
                             <Link
+                              to={`/dashboard/brand/briefs/${brief.id}/matches`}
+                              className="button button--secondary button--sm brand-brief-item__matches-btn"
+                              title="View AI Creator Matches with semantic scoring"
+                            >
+                              ⚡ AI Matches
+                            </Link>
+                            <Link
                               to={`/briefs/${brief.id}`}
                               className="button button--secondary button--sm"
                             >

@@ -169,6 +169,13 @@ export default function BriefDetailPage() {
               </button>
             )}
 
+            <Link
+              to={`/dashboard/brand/briefs/${brief.id}/matches`}
+              className="button button--secondary brief-matches-btn"
+              title="View AI Creator Matches and Semantic Scoring"
+            >
+              ✦ AI Matches &amp; Scoring
+            </Link>
             <Link to="/dashboard/brand" className="button button--secondary">
               Brand Director Workspace
             </Link>

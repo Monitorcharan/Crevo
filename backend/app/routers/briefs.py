@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from app.core.security import get_current_user, get_current_brand
 from app.db.supabase import repo
@@ -9,7 +9,9 @@ from app.schemas.brief import (
     BriefListResponse,
 )
 from app.schemas.recommendation import RecommendationResponse
+from app.schemas.matching import MatchResponse
 from app.services.recommendation_engine import compute_recommendations_for_brief
+from app.services.matching_engine import matching_engine
 
 router = APIRouter(prefix="/api/briefs", tags=["Creative Briefs"])
 
@@ -147,3 +149,63 @@ async def get_brief_recommendations(brief_id: str, limit: int = Query(5, ge=1, l
         recommendations=recommendations,
         total_matches=len(recommendations),
     )
+
+
+@router.get("/{brief_id}/matches", response_model=MatchResponse)
+async def get_brief_matches(
+    brief_id: str,
+    mandatory_tools: Optional[str] = Query(None, description="Comma-separated list of mandatory required AI tools"),
+    min_score: float = Query(0.0, ge=0.0, le=100.0, description="Minimum overall match score filter"),
+    limit: int = Query(10, ge=1, le=50, description="Maximum number of matched creators to return"),
+    current_user: dict = Depends(get_current_user),
+):
+    """
+    AI-Powered Hybrid Creator Matching Engine.
+    Executes mandatory pre-ranking constraint checks, semantic similarity with all-MiniLM-L6-v2,
+    and multi-factor weighted scoring (35% portfolio, 25% skills, 20% tools, 15% format, 5% availability).
+    Only authorized brand owners or platform admins may access private draft briefs and their matches.
+    """
+    brief = await repo.get_brief_by_id(brief_id)
+    if not brief:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Creative brief with ID '{brief_id}' was not found",
+        )
+
+    # Authorization enforcement:
+    # If the brief is in draft status, only the owning brand (or admin) can view recommendations/matches.
+    if brief.get("status") == "draft":
+        if current_user.get("id") != brief.get("owner_id") and current_user.get("role") != "admin":
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="You are not authorized to view matches for a private draft brief belonging to another brand",
+            )
+
+    # Creators cannot view matches if not allowed (brands and agency accounts explore creator matches)
+    if current_user.get("role") == "creator" and brief.get("owner_id") != current_user.get("id"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Creator accounts are not authorized to inspect brand matching recommendations",
+        )
+
+    # Parse mandatory tools parameter if supplied
+    tools_list: Optional[List[str]] = None
+    if mandatory_tools and mandatory_tools.strip():
+        tools_list = [t.strip() for t in mandatory_tools.split(",") if t.strip()]
+
+    # Retrieve candidate creators and their portfolios
+    creators_data = await repo.get_creators(limit=100)
+    creators = creators_data.get("items", [])
+    portfolios = await repo.get_all_portfolios()
+
+    # Run AI-powered hybrid matching engine
+    match_response = matching_engine.match_creators_for_brief(
+        brief=brief,
+        creators=creators,
+        portfolios=portfolios,
+        mandatory_tools=tools_list,
+        min_score=min_score,
+        limit=limit,
+    )
+    return match_response
+

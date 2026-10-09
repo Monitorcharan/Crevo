@@ -423,3 +423,30 @@ export async function getBrandDashboardData(token) {
     applications,
   };
 }
+
+/**
+ * Fetch AI-powered creator matches for a creative brief.
+ * Hybrid matching service combining mandatory constraints, all-MiniLM-L6-v2 semantic embeddings,
+ * and 35/25/20/15/5 multi-factor scoring.
+ */
+export async function getBriefMatches(token, briefId, { mandatoryTools = null, minScore = 0, limit = 10 } = {}) {
+  const params = new URLSearchParams();
+  if (mandatoryTools) params.append('mandatory_tools', mandatoryTools);
+  if (minScore) params.append('min_score', String(minScore));
+  if (limit) params.append('limit', String(limit));
+
+  const url = `${API_BASE_URL}/api/briefs/${briefId}/matches?${params.toString()}`;
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${token || 'test-brand-token'}`,
+    },
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to retrieve AI matches for this creative brief');
+  }
+
+  return await response.json();
+}
+
