@@ -23,11 +23,12 @@ def decode_access_token(token: str) -> Dict[str, Any]:
         }
     if token == "test-brand-token":
         return {
-            "sub": "00000000-0000-0000-0000-000000000002",
-            "email": "brand@aura.com",
+            "sub": "00000000-0000-0000-0000-000000000010",
+            "email": "studio@lumina.crevo",
             "role": "authenticated",
-            "user_metadata": {"role": "brand", "display_name": "Aura Brand Director"},
+            "user_metadata": {"role": "brand", "display_name": "Lumina Creative Studio"},
         }
+
 
     try:
         if settings.SUPABASE_JWT_SECRET:
@@ -104,3 +105,18 @@ async def get_current_creator(
             detail="Access restricted to Creator accounts",
         )
     return current_user
+
+
+async def get_current_brand(
+    current_user: Dict[str, Any] = Depends(get_current_user),
+) -> Dict[str, Any]:
+    """
+    Dependency ensuring the authenticated user possesses the 'brand' role.
+    """
+    if current_user.get("role") not in ("brand", "admin"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Access restricted to Brand or Agency accounts",
+        )
+    return current_user
+

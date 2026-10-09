@@ -76,15 +76,16 @@ export function AuthProvider({ children }) {
     }
 
     // Demo Mode Sign In
+    const isBrand = email.includes('brand') || email.includes('lumina');
     const mockUser = {
-      id: '00000000-0000-0000-0000-000000000001',
+      id: isBrand ? '00000000-0000-0000-0000-000000000002' : '00000000-0000-0000-0000-000000000001',
       email,
-      role: email.includes('brand') ? 'brand' : 'creator',
-      displayName: email.split('@')[0],
+      role: isBrand ? 'brand' : 'creator',
+      displayName: isBrand ? 'Lumina Creative Studio' : email.split('@')[0],
       avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
     };
     const mockSession = {
-      access_token: 'test-creator-token',
+      access_token: isBrand ? 'test-brand-token' : 'test-creator-token',
       user: mockUser,
     };
     setUser(mockUser);
@@ -92,6 +93,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify({ user: mockUser, session: mockSession }));
     return { user: mockUser, session: mockSession };
   };
+
 
   const signUp = async ({ email, password, role = 'creator', displayName }) => {
     if (isSupabaseConfigured && supabase) {

@@ -1,6 +1,6 @@
 import logging
 import uuid
-from datetime import datetime
+from datetime import datetime, date
 from typing import List, Dict, Any, Optional
 from supabase import create_client, Client
 from app.core.config import settings
@@ -90,7 +90,7 @@ DEMO_CREATORS_SEED: List[Dict[str, Any]] = [
         "specialization": "Product Ads",
         "bio": "Pioneers hyperrealistic automotive commercials, kinetic luxury product spots, and cinematic motion graphics for performance brands.",
         "skills": ["Product Cinematography", "Automotive Lighting", "Motion Graphics", "3D Scene Matching"],
-        "ai_tools": ["Runway Gen-3", "Midjourney v6", "Stable Diffusion", "Unreal Engine", "ComfyUI"],
+        "ai_tools": ["Runway Gen-3", "Midjourney v6", "Stable Diffusion", "Unreal Engine", "ComfyUI", "Flux.1"],
         "availability": "Available Now",
         "location": "London, UK",
         "rating": 5.0,
@@ -120,6 +120,18 @@ DEMO_CREATORS_SEED: List[Dict[str, Any]] = [
                 "workflow_description": "Track camera path modeled in Unreal Engine 5, fed into ComfyUI diffusion pipeline for photorealistic titanium materials.",
                 "commercial_use_status": "cleared",
                 "created_at": datetime(2026, 9, 20).isoformat(),
+            },
+            {
+                "id": "item-marcus-2",
+                "creator_id": "00000000-0000-0000-0000-000000000002",
+                "title": "Ethereal Essence: Luxury Fragrance Campaign",
+                "description": "Commercial still campaign for a luxury fragrance brand showcasing sculpted glass flacons.",
+                "media_url": "/creators/perfume_ad.jpg",
+                "media_type": "ad",
+                "tools_used": ["Flux.1 Pro", "Midjourney v6", "Magnific AI"],
+                "workflow_description": "Synthesized with Flux.1 Pro utilizing controlled glass caustics lighting prompts.",
+                "commercial_use_status": "cleared",
+                "created_at": datetime(2026, 9, 25).isoformat(),
             }
         ],
     },
@@ -151,7 +163,96 @@ DEMO_CREATORS_SEED: List[Dict[str, Any]] = [
             "inspectionDate": "October 2026",
             "note": "Demo data representing Crevo Trust & Safety verification protocol.",
         },
-        "portfolio_items": [],
+        "portfolio_items": [
+            {
+                "id": "item-sophia-1",
+                "creator_id": "00000000-0000-0000-0000-000000000003",
+                "title": "Neon Shinjuku: Android Awakening",
+                "description": "Cyberpunk narrative sequence following a cybernetic street samurai navigating holographic rain-slicked alleyways.",
+                "media_url": "/creators/character_cyber.jpg",
+                "media_type": "animation",
+                "tools_used": ["Kling AI 1.5", "ComfyUI AnimateDiff", "Topaz Video AI"],
+                "workflow_description": "Choreographed using AnimateDiff motion modules in ComfyUI with high temporal coherence.",
+                "commercial_use_status": "cleared",
+                "created_at": datetime(2026, 10, 5).isoformat(),
+            }
+        ],
+    },
+]
+
+DEMO_BRIEFS_SEED: List[Dict[str, Any]] = [
+    {
+        "id": "20000000-0000-0000-0000-000000000001",
+        "owner_id": "00000000-0000-0000-0000-000000000010",
+        "title": "Hyperion Apex: Autonomous Electric Scooter Launch Film",
+        "brand_name": "Hyperion Mobility",
+        "description": "Create a high-octane 30-second cinematic launch commercial showcasing the Hyperion Apex electric scooter gliding through a rainy neo-cyberpunk metropolis with neon puddle reflections and dynamic camera swoops.",
+        "creative_objective": "Drive pre-orders among urban tech professionals and position Hyperion as the premium apex of personal electric transit.",
+        "content_type": "video",
+        "visual_style": "Neo-noir cyberpunk, high-contrast anamorphic lens flares, rain-slicked asphalt, vibrant violet and teal reflections.",
+        "aspect_ratio": "16:9",
+        "duration": "30 seconds",
+        "ai_tools_preferred": ["Runway Gen-3", "Kling AI", "Midjourney v6", "Topaz Video AI"],
+        "deliverables": ["1x 30s 4K Master Video (16:9)", "1x 15s Cutdown for Social (9:16)", "5x Key Visual Stills (4K)"],
+        "budget_min": 3500,
+        "budget_max": 6000,
+        "currency": "USD",
+        "deadline": "2026-10-30",
+        "commercial_use_requirements": "Full commercial buyout with worldwide digital and broadcast rights across web, social, and CTV.",
+        "licensing_expectations": "Perpetual exclusive commercial license for all generated deliverables and final cut.",
+        "revision_expectations": "3 rounds of storyboard & generative prompt revisions included.",
+        "status": "published",
+        "created_at": "2026-10-09T09:42:29Z",
+        "updated_at": "2026-10-09T09:42:29Z",
+    },
+    {
+        "id": "20000000-0000-0000-0000-000000000002",
+        "owner_id": "00000000-0000-0000-0000-000000000010",
+        "title": "Aura Botanica: Bioluminescent Fragrance Campaign",
+        "brand_name": "Maison de L'Ombre",
+        "description": "Develop an ethereal advertising campaign featuring crystalline perfume flacons intertwined with luminous deep-jungle flora and bioluminescent dew droplets.",
+        "creative_objective": "Convey organic luxury and botanical mystique for luxury retail displays and global social rollouts.",
+        "content_type": "ad",
+        "visual_style": "Luminous macro realism, dark emerald and soft amber caustics, soft atmospheric bloom, hyper-detailed glass refractions.",
+        "aspect_ratio": "4:5",
+        "duration": None,
+        "ai_tools_preferred": ["Flux.1 Pro", "Midjourney v6", "Magnific AI", "Photoshop GenFill"],
+        "deliverables": ["3x High-Res Campaign Stills (8K print-ready)", "1x 10s Seamless Looping Ambient Motion Poster"],
+        "budget_min": 2000,
+        "budget_max": 4000,
+        "currency": "USD",
+        "deadline": "2026-10-23",
+        "commercial_use_requirements": "Global commercial advertising and print catalog rights.",
+        "licensing_expectations": "Perpetual non-exclusive worldwide rights.",
+        "revision_expectations": "2 rounds of revisions.",
+        "status": "published",
+        "created_at": "2026-10-09T09:42:29Z",
+        "updated_at": "2026-10-09T09:42:29Z",
+    },
+]
+
+DEMO_APPLICATIONS_SEED: List[Dict[str, Any]] = [
+    {
+        "id": "30000000-0000-0000-0000-000000000001",
+        "brief_id": "20000000-0000-0000-0000-000000000001",
+        "creator_id": "00000000-0000-0000-0000-000000000001",
+        "proposal": "I specialize in cinematic narrative sci-fi directing using Runway Gen-3 and Kling AI. I can deliver multi-angle camera tracking and pristine character consistency for the Hyperion Apex sequence with custom sound design.",
+        "proposed_rate": 4800,
+        "portfolio_item_ids": ["10000000-0000-0000-0000-000000000001"],
+        "status": "shortlisted",
+        "created_at": "2026-10-09T09:42:29Z",
+        "updated_at": "2026-10-09T09:42:29Z",
+    },
+    {
+        "id": "30000000-0000-0000-0000-000000000002",
+        "brief_id": "20000000-0000-0000-0000-000000000002",
+        "creator_id": "00000000-0000-0000-0000-000000000002",
+        "proposal": "I have proven experience in high-end luxury cosmetic staging using Flux.1 and Magnific upscaling. Please see my Ethereal Essence campaign in my portfolio for direct proof of glass caustic realism.",
+        "proposed_rate": 2800,
+        "portfolio_item_ids": ["10000000-0000-0000-0000-000000000003"],
+        "status": "pending",
+        "created_at": "2026-10-09T09:42:29Z",
+        "updated_at": "2026-10-09T09:42:29Z",
     },
 ]
 
@@ -164,9 +265,15 @@ class DatabaseRepository:
 
     def __init__(self, client: Optional[Client] = None):
         self.client = client
-        # In-memory store for local testing
         self._creators: List[Dict[str, Any]] = [dict(c) for c in DEMO_CREATORS_SEED]
-        self._profiles: Dict[str, Dict[str, Any]] = {}
+        self._profiles: Dict[str, Dict[str, Any]] = {
+            "00000000-0000-0000-0000-000000000001": {"id": "00000000-0000-0000-0000-000000000001", "role": "creator", "display_name": "Elena Vance"},
+            "00000000-0000-0000-0000-000000000002": {"id": "00000000-0000-0000-0000-000000000002", "role": "creator", "display_name": "Marcus Sterling"},
+            "00000000-0000-0000-0000-000000000003": {"id": "00000000-0000-0000-0000-000000000003", "role": "creator", "display_name": "Sophia Chen"},
+            "00000000-0000-0000-0000-000000000010": {"id": "00000000-0000-0000-0000-000000000010", "role": "brand", "display_name": "Lumina Creative Studio"},
+        }
+        self._briefs: List[Dict[str, Any]] = [dict(b) for b in DEMO_BRIEFS_SEED]
+        self._applications: List[Dict[str, Any]] = [dict(a) for a in DEMO_APPLICATIONS_SEED]
 
     @property
     def is_live(self) -> bool:
@@ -175,6 +282,18 @@ class DatabaseRepository:
     # -------------------------------------------------------------------------
     # Creator Profiles
     # -------------------------------------------------------------------------
+    def _flatten_creator(self, item: Dict[str, Any]) -> Dict[str, Any]:
+        c = dict(item)
+        profile = c.pop("profiles", None)
+        if isinstance(profile, dict):
+            c["id"] = profile.get("id") or c.get("user_id")
+            c["display_name"] = profile.get("display_name") or "AI Creator"
+            c["avatar_url"] = profile.get("avatar_url") or c.get("avatar_url")
+        elif "id" not in c and "user_id" in c:
+            c["id"] = c["user_id"]
+            c["display_name"] = c.get("display_name") or "AI Creator"
+        return c
+
     async def get_creators(
         self,
         search: Optional[str] = None,
@@ -186,7 +305,7 @@ class DatabaseRepository:
     ) -> Dict[str, Any]:
         if self.is_live:
             try:
-                query = self.client.table("creator_profiles").select("*, profiles(*), portfolio_items(*)")
+                query = self.client.table("creator_profiles").select("*, profiles(*)")
                 if specialization and specialization != "All":
                     query = query.eq("specialization", specialization)
                 if availability and availability != "All":
@@ -195,7 +314,10 @@ class DatabaseRepository:
                     query = query.contains("ai_tools", [ai_tool])
 
                 response = query.range(offset, offset + limit - 1).execute()
-                items = response.data or []
+                items = [self._flatten_creator(item) for item in (response.data or [])]
+                for item in items:
+                    p_res = self.client.table("portfolio_items").select("*").eq("creator_id", item.get("user_id")).execute()
+                    item["portfolio_items"] = p_res.data or []
                 total = len(items)
                 return {"items": items, "total": total, "limit": limit, "offset": offset}
             except Exception as e:
@@ -232,84 +354,68 @@ class DatabaseRepository:
     async def get_creator_by_id(self, creator_id: str) -> Optional[Dict[str, Any]]:
         if self.is_live:
             try:
-                response = (
-                    self.client.table("creator_profiles")
-                    .select("*, profiles(*), portfolio_items(*)")
-                    .or_(f"user_id.eq.{creator_id},id.eq.{creator_id}")
-                    .single()
-                    .execute()
-                )
-                if response.data:
-                    return response.data
+                res = self.client.table("creator_profiles").select("*, profiles(*)").eq("user_id", creator_id).execute()
+                if res.data:
+                    c = self._flatten_creator(res.data[0])
+                    p_res = self.client.table("portfolio_items").select("*").eq("creator_id", c.get("user_id")).execute()
+                    c["portfolio_items"] = p_res.data or []
+                    return c
             except Exception as e:
-                logger.debug("Live fetch error: %s", e)
+                logger.error("Supabase creator lookup failed: %s", e)
 
-        # Check in-memory by slug or user_id
         for c in self._creators:
-            if c["id"] == creator_id or c.get("user_id") == creator_id:
+            if c["id"] == creator_id or c["user_id"] == creator_id:
                 return c
         return None
 
     async def update_creator_profile(self, user_id: str, update_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         clean_data = {k: v for k, v in update_data.items() if v is not None}
-
         if self.is_live:
             try:
-                # Update profiles table if display_name / avatar_url are present
-                profile_updates = {}
-                if "display_name" in clean_data:
-                    profile_updates["display_name"] = clean_data.pop("display_name")
-                if "avatar_url" in clean_data:
-                    profile_updates["avatar_url"] = clean_data.pop("avatar_url")
-
-                if profile_updates:
-                    self.client.table("profiles").update(profile_updates).eq("id", user_id).execute()
-
-                if clean_data:
-                    res = self.client.table("creator_profiles").update(clean_data).eq("user_id", user_id).execute()
-                    if res.data:
-                        return await self.get_creator_by_id(user_id)
+                res = self.client.table("creator_profiles").update(clean_data).eq("user_id", user_id).execute()
+                if res.data:
+                    return await self.get_creator_by_id(user_id)
             except Exception as e:
-                logger.error("Supabase update error: %s", e)
+                logger.error("Supabase update creator failed: %s", e)
 
-        # In-memory update
         creator = await self.get_creator_by_id(user_id)
         if creator:
             for k, v in clean_data.items():
                 creator[k] = v
             return creator
+        return None
 
-        # If not found, create new record
-        new_creator = {
-            "id": user_id,
-            "user_id": user_id,
-            "display_name": clean_data.get("display_name", "AI Creator"),
-            "avatar_url": clean_data.get("avatar_url"),
-            "headline": clean_data.get("headline", "Generative Director"),
-            "bio": clean_data.get("bio", ""),
-            "specialization": clean_data.get("specialization", "AI Art"),
-            "skills": clean_data.get("skills", []),
-            "ai_tools": clean_data.get("ai_tools", []),
-            "availability": clean_data.get("availability", "Available Now"),
-            "cover_url": clean_data.get("cover_url", "/creators/cyber_city.jpg"),
-            "rating": 5.0,
-            "reviews_count": 0,
-            "projects_count": 0,
-            "starting_price": 1500,
-            "price_unit": "project",
-            "portfolio_items": [],
-        }
-        self._creators.append(new_creator)
-        return new_creator
 
     # -------------------------------------------------------------------------
     # Portfolio Items
     # -------------------------------------------------------------------------
     async def get_creator_portfolio(self, creator_id: str) -> List[Dict[str, Any]]:
+        if self.is_live:
+            try:
+                res = self.client.table("portfolio_items").select("*").eq("creator_id", creator_id).execute()
+                if res.data:
+                    return res.data
+            except Exception as e:
+                logger.error("Supabase get portfolio error: %s", e)
+
         creator = await self.get_creator_by_id(creator_id)
         if not creator:
             return []
         return creator.get("portfolio_items", [])
+
+    async def get_all_portfolios(self) -> List[Dict[str, Any]]:
+        if self.is_live:
+            try:
+                res = self.client.table("portfolio_items").select("*").execute()
+                if res.data:
+                    return res.data
+            except Exception as e:
+                logger.error("Supabase get all portfolios error: %s", e)
+
+        all_p = []
+        for c in self._creators:
+            all_p.extend(c.get("portfolio_items", []))
+        return all_p
 
     async def create_portfolio_item(self, creator_id: str, item_data: Dict[str, Any]) -> Dict[str, Any]:
         item_id = str(uuid.uuid4())
@@ -326,7 +432,7 @@ class DatabaseRepository:
                 if res.data:
                     return res.data[0]
             except Exception as e:
-                logger.error("Supabase insert error: %s", e)
+                logger.error("Supabase insert portfolio error: %s", e)
 
         creator = await self.get_creator_by_id(creator_id)
         if creator:
@@ -341,7 +447,6 @@ class DatabaseRepository:
         self, item_id: str, creator_id: str, update_data: Dict[str, Any]
     ) -> Optional[Dict[str, Any]]:
         clean_data = {k: v for k, v in update_data.items() if v is not None}
-
         if self.is_live:
             try:
                 res = (
@@ -354,7 +459,7 @@ class DatabaseRepository:
                 if res.data:
                     return res.data[0]
             except Exception as e:
-                logger.error("Supabase update error: %s", e)
+                logger.error("Supabase update portfolio error: %s", e)
 
         creator = await self.get_creator_by_id(creator_id)
         if creator:
@@ -371,7 +476,7 @@ class DatabaseRepository:
                 self.client.table("portfolio_items").delete().eq("id", item_id).eq("creator_id", creator_id).execute()
                 return True
             except Exception as e:
-                logger.error("Supabase delete error: %s", e)
+                logger.error("Supabase delete portfolio error: %s", e)
 
         creator = await self.get_creator_by_id(creator_id)
         if creator:
@@ -379,6 +484,265 @@ class DatabaseRepository:
             creator["portfolio_items"] = [i for i in creator.get("portfolio_items", []) if i["id"] != item_id]
             return len(creator["portfolio_items"]) < before_len
         return False
+
+    # -------------------------------------------------------------------------
+    # Creative Briefs
+    # -------------------------------------------------------------------------
+    async def list_briefs(
+        self,
+        status: Optional[str] = None,
+        owner_id: Optional[str] = None,
+        search: Optional[str] = None,
+        limit: int = 20,
+        offset: int = 0,
+    ) -> Dict[str, Any]:
+        if self.is_live:
+            try:
+                query = self.client.table("briefs").select("*, brief_applications(count)")
+                if status and status != "All":
+                    query = query.eq("status", status)
+                if owner_id:
+                    query = query.eq("owner_id", owner_id)
+                res = query.order("created_at", desc=True).range(offset, offset + limit - 1).execute()
+                raw_items = res.data or []
+                for item in raw_items:
+                    # flatten count
+                    counts = item.get("brief_applications", [])
+                    item["applications_count"] = counts[0]["count"] if counts and isinstance(counts, list) and "count" in counts[0] else len(counts)
+                total = len(raw_items)
+                return {"items": raw_items, "total": total, "limit": limit, "offset": offset}
+            except Exception as e:
+                logger.error("Supabase list briefs error: %s", e)
+
+        results = [dict(b) for b in self._briefs]
+        if status and status != "All":
+            results = [b for b in results if b.get("status") == status]
+        if owner_id:
+            results = [b for b in results if b.get("owner_id") == owner_id]
+        if search and search.strip():
+            q = search.lower().strip()
+            results = [
+                b for b in results
+                if q in b.get("title", "").lower()
+                or q in b.get("description", "").lower()
+                or q in b.get("brand_name", "").lower()
+            ]
+
+        # Attach application counts
+        for b in results:
+            b["applications_count"] = sum(1 for a in self._applications if a["brief_id"] == b["id"])
+
+        total = len(results)
+        paginated = results[offset : offset + limit]
+        return {"items": paginated, "total": total, "limit": limit, "offset": offset}
+
+    async def get_brief_by_id(self, brief_id: str) -> Optional[Dict[str, Any]]:
+        if self.is_live:
+            try:
+                res = self.client.table("briefs").select("*, brief_applications(count)").eq("id", brief_id).execute()
+                if res.data:
+                    item = res.data[0]
+                    counts = item.get("brief_applications", [])
+                    item["applications_count"] = counts[0]["count"] if counts and isinstance(counts, list) and "count" in counts[0] else len(counts)
+                    return item
+            except Exception as e:
+                logger.error("Supabase get brief error: %s", e)
+
+        for b in self._briefs:
+            if b["id"] == brief_id:
+                b_copy = dict(b)
+                b_copy["applications_count"] = sum(1 for a in self._applications if a["brief_id"] == b["id"])
+                return b_copy
+        return None
+
+    async def create_brief(self, owner_id: str, brief_data: Dict[str, Any]) -> Dict[str, Any]:
+        brief_id = str(uuid.uuid4())
+        created_brief = {
+            "id": brief_id,
+            "owner_id": owner_id,
+            "created_at": datetime.utcnow().isoformat(),
+            "updated_at": datetime.utcnow().isoformat(),
+            **brief_data,
+        }
+
+        # Convert date to string if needed
+        if isinstance(created_brief.get("deadline"), (date, datetime)):
+            created_brief["deadline"] = created_brief["deadline"].isoformat()
+
+        if self.is_live:
+            try:
+                res = self.client.table("briefs").insert(created_brief).execute()
+                if res.data:
+                    item = res.data[0]
+                    item["applications_count"] = 0
+                    return item
+            except Exception as e:
+                logger.error("Supabase insert brief error: %s", e)
+
+        created_brief["applications_count"] = 0
+        self._briefs.append(created_brief)
+        return created_brief
+
+    async def update_brief(self, brief_id: str, owner_id: str, update_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        clean_data = {k: v for k, v in update_data.items() if v is not None}
+        clean_data["updated_at"] = datetime.utcnow().isoformat()
+        if isinstance(clean_data.get("deadline"), (date, datetime)):
+            clean_data["deadline"] = clean_data["deadline"].isoformat()
+
+        if self.is_live:
+            try:
+                res = self.client.table("briefs").update(clean_data).eq("id", brief_id).eq("owner_id", owner_id).execute()
+                if res.data:
+                    return res.data[0]
+            except Exception as e:
+                logger.error("Supabase update brief error: %s", e)
+
+        for b in self._briefs:
+            if b["id"] == brief_id and b["owner_id"] == owner_id:
+                for k, v in clean_data.items():
+                    b[k] = v
+                return b
+        return None
+
+    async def delete_brief(self, brief_id: str, owner_id: str) -> bool:
+        if self.is_live:
+            try:
+                self.client.table("briefs").delete().eq("id", brief_id).eq("owner_id", owner_id).execute()
+                return True
+            except Exception as e:
+                logger.error("Supabase delete brief error: %s", e)
+
+        before_len = len(self._briefs)
+        self._briefs = [b for b in self._briefs if not (b["id"] == brief_id and b["owner_id"] == owner_id)]
+        return len(self._briefs) < before_len
+
+    # -------------------------------------------------------------------------
+    # Brief Applications
+    # -------------------------------------------------------------------------
+    async def list_brief_applications(
+        self,
+        brief_id: Optional[str] = None,
+        creator_id: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
+        if self.is_live:
+            try:
+                query = self.client.table("brief_applications").select("*, profiles(*)")
+                if brief_id:
+                    query = query.eq("brief_id", brief_id)
+                if creator_id:
+                    query = query.eq("creator_id", creator_id)
+                res = query.order("created_at", desc=True).execute()
+                raw_items = res.data or []
+                enriched = []
+                for a in raw_items:
+                    creator = await self.get_creator_by_id(a["creator_id"])
+                    a["creator"] = {
+                        "id": a["creator_id"],
+                        "display_name": creator.get("display_name", "Creator") if creator else a.get("profiles", {}).get("display_name", "Creator"),
+                        "avatar_url": creator.get("avatar_url") if creator else a.get("profiles", {}).get("avatar_url"),
+                        "headline": creator.get("headline") if creator else None,
+                        "specialization": creator.get("specialization") if creator else None,
+                        "rating": creator.get("rating", 5.0) if creator else 5.0,
+                        "starting_price": creator.get("starting_price") if creator else None,
+                        "ai_tools": creator.get("ai_tools", []) if creator else [],
+                    }
+                    enriched.append(a)
+                return enriched
+            except Exception as e:
+                logger.error("Supabase list applications error: %s", e)
+
+        results = [a for a in self._applications]
+        if brief_id:
+            results = [a for a in results if a["brief_id"] == brief_id]
+        if creator_id:
+            results = [a for a in results if a["creator_id"] == creator_id]
+
+        enriched = []
+        for a in results:
+            a_copy = dict(a)
+            creator = await self.get_creator_by_id(a_copy["creator_id"])
+            a_copy["creator"] = {
+                "id": a_copy["creator_id"],
+                "display_name": creator.get("display_name", "Creator") if creator else "Creator",
+                "avatar_url": creator.get("avatar_url") if creator else None,
+                "headline": creator.get("headline") if creator else None,
+                "specialization": creator.get("specialization") if creator else None,
+                "rating": creator.get("rating", 5.0) if creator else 5.0,
+                "starting_price": creator.get("starting_price") if creator else None,
+                "ai_tools": creator.get("ai_tools", []) if creator else [],
+            }
+            enriched.append(a_copy)
+        return enriched
+
+    async def get_application_by_id(self, app_id: str) -> Optional[Dict[str, Any]]:
+        if self.is_live:
+            try:
+                res = self.client.table("brief_applications").select("*").eq("id", app_id).execute()
+                if res.data:
+                    return res.data[0]
+            except Exception as e:
+                logger.error("Supabase get application error: %s", e)
+
+        for a in self._applications:
+            if a["id"] == app_id:
+                return a
+        return None
+
+    async def create_application(self, brief_id: str, creator_id: str, app_data: Dict[str, Any]) -> Dict[str, Any]:
+        app_id = str(uuid.uuid4())
+        created_app = {
+            "id": app_id,
+            "brief_id": brief_id,
+            "creator_id": creator_id,
+            "status": "pending",
+            "created_at": datetime.utcnow().isoformat(),
+            "updated_at": datetime.utcnow().isoformat(),
+            **app_data,
+        }
+
+        if self.is_live:
+            try:
+                res = self.client.table("brief_applications").insert(created_app).execute()
+                if res.data:
+                    item = res.data[0]
+                    creator = await self.get_creator_by_id(creator_id)
+                    item["creator"] = {
+                        "id": creator_id,
+                        "display_name": creator.get("display_name", "Creator") if creator else "Creator",
+                        "avatar_url": creator.get("avatar_url") if creator else None,
+                        "headline": creator.get("headline") if creator else None,
+                        "specialization": creator.get("specialization") if creator else None,
+                    }
+                    return item
+            except Exception as e:
+                logger.error("Supabase insert application error: %s", e)
+
+        creator = await self.get_creator_by_id(creator_id)
+        created_app["creator"] = {
+            "id": creator_id,
+            "display_name": creator.get("display_name", "Creator") if creator else "Creator",
+            "avatar_url": creator.get("avatar_url") if creator else None,
+            "headline": creator.get("headline") if creator else None,
+            "specialization": creator.get("specialization") if creator else None,
+        }
+        self._applications.append(created_app)
+        return created_app
+
+    async def update_application_status(self, app_id: str, status: str) -> Optional[Dict[str, Any]]:
+        if self.is_live:
+            try:
+                res = self.client.table("brief_applications").update({"status": status, "updated_at": datetime.utcnow().isoformat()}).eq("id", app_id).execute()
+                if res.data:
+                    return res.data[0]
+            except Exception as e:
+                logger.error("Supabase update application status error: %s", e)
+
+        for a in self._applications:
+            if a["id"] == app_id:
+                a["status"] = status
+                a["updated_at"] = datetime.utcnow().isoformat()
+                return a
+        return None
 
 
 # Singleton instance

@@ -42,6 +42,7 @@ def run_migrations():
     migration_files = [
         "001_initial_schema.sql",
         "002_seed_demo_data.sql",
+        "003_briefs_and_applications.sql",
     ]
 
     for fname in migration_files:

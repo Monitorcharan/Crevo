@@ -2,7 +2,14 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.routers import creators_router, portfolios_router, users_router
+from app.routers import (
+    creators_router,
+    portfolios_router,
+    users_router,
+    briefs_router,
+    applications_router,
+    ai_router,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -31,6 +38,9 @@ app.add_middleware(
 app.include_router(creators_router)
 app.include_router(portfolios_router)
 app.include_router(users_router)
+app.include_router(briefs_router)
+app.include_router(applications_router)
+app.include_router(ai_router)
 
 
 @app.get("/health", tags=["Health"])

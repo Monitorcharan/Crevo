@@ -13,6 +13,30 @@ from app.schemas.creator import (
     CreatorProfileResponse,
     CreatorListResponse,
 )
+from app.schemas.brief import (
+    ContentTypeEnum,
+    BriefStatusEnum,
+    BriefBase,
+    BriefCreate,
+    BriefUpdate,
+    BriefResponse,
+    BriefListResponse,
+    AIGenerateBriefRequest,
+    AIGenerateBriefResponse,
+)
+from app.schemas.application import (
+    ApplicationStatusEnum,
+    ApplicationBase,
+    ApplicationCreate,
+    ApplicationStatusUpdate,
+    ApplicationResponse,
+    ApplicationListResponse,
+    CreatorSummary,
+)
+from app.schemas.recommendation import (
+    RecommendedCreator,
+    RecommendationResponse,
+)
 
 __all__ = [
     "RoleEnum",
@@ -30,4 +54,22 @@ __all__ = [
     "CreatorProfileUpdate",
     "CreatorProfileResponse",
     "CreatorListResponse",
+    "ContentTypeEnum",
+    "BriefStatusEnum",
+    "BriefBase",
+    "BriefCreate",
+    "BriefUpdate",
+    "BriefResponse",
+    "BriefListResponse",
+    "AIGenerateBriefRequest",
+    "AIGenerateBriefResponse",
+    "ApplicationStatusEnum",
+    "ApplicationBase",
+    "ApplicationCreate",
+    "ApplicationStatusUpdate",
+    "ApplicationResponse",
+    "ApplicationListResponse",
+    "CreatorSummary",
+    "RecommendedCreator",
+    "RecommendationResponse",
 ]

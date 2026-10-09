@@ -8,7 +8,7 @@ export default function InviteBriefModal({ creator, onClose, onInvitationSent })
   const shouldReduceMotion = useReducedMotion();
   const [selectedBriefId, setSelectedBriefId] = useState(SAMPLE_BRIEFS[0]?.id || 'custom');
   const [customTitle, setCustomTitle] = useState('');
-  const [customBudget, setCustomBudget] = useState(`$${creator.startingPrice * 1.5}`);
+  const [customBudget, setCustomBudget] = useState(`$${((creator?.startingPrice || 1500) * 1.5).toLocaleString()}`);
   const [customDeadline, setCustomDeadline] = useState('2 weeks');
   const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -32,7 +32,7 @@ export default function InviteBriefModal({ creator, onClose, onInvitationSent })
     const chosenBrief = SAMPLE_BRIEFS.find((b) => b.id === selectedBriefId);
     const briefTitle = chosenBrief ? chosenBrief.title : customTitle || 'Custom Commission Brief';
 
-    await inviteCreatorToBrief(creator.id, {
+    await inviteCreatorToBrief(creator?.id, {
       title: briefTitle,
       budget: chosenBrief ? chosenBrief.budget : customBudget,
       deadline: chosenBrief ? chosenBrief.deadline : customDeadline,
@@ -79,17 +79,18 @@ export default function InviteBriefModal({ creator, onClose, onInvitationSent })
               {/* Header */}
               <div className="invite-modal__header">
                 <div className="invite-modal__creator-badge">
-                  <img src={creator.avatar} alt={creator.name} className="invite-modal__avatar" />
+                  <img src={creator?.avatar} alt={creator?.name} className="invite-modal__avatar" />
                   <div>
                     <h2 id="invite-modal-title" className="invite-modal__title">
-                      Invite {creator.name}
+                      Invite {creator?.name}
                     </h2>
                     <p className="invite-modal__subtext">
-                      {creator.title} • Baseline ${creator.startingPrice.toLocaleString()} /{creator.priceUnit}
+                      {creator?.title} • Baseline ${(creator?.startingPrice || 1500).toLocaleString()} /{creator?.priceUnit || 'project'}
                     </p>
                   </div>
                 </div>
               </div>
+
 
               {/* Brief Selector */}
               <div className="invite-modal__field">

@@ -8,6 +8,10 @@ import About from './components/About/About.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import CreatorProfilePage from './pages/CreatorProfilePage/CreatorProfilePage.jsx';
 import DashboardPage from './pages/DashboardPage/DashboardPage.jsx';
+import BrandDashboardPage from './pages/BrandDashboardPage/BrandDashboardPage.jsx';
+import BriefBuilderPage from './pages/BriefBuilderPage/BriefBuilderPage.jsx';
+import BriefsListPage from './pages/BriefsListPage/BriefsListPage.jsx';
+import BriefDetailPage from './pages/BriefDetailPage/BriefDetailPage.jsx';
 
 /**
  * Scroll and Hash Manager
@@ -54,8 +58,13 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/creators/:id" element={<CreatorProfilePage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/dashboard/brand" element={<BrandDashboardPage />} />
+        <Route path="/briefs" element={<BriefsListPage />} />
+        <Route path="/briefs/new" element={<BriefBuilderPage />} />
+        <Route path="/briefs/:id" element={<BriefDetailPage />} />
       </Routes>
       <Footer />
     </AuthProvider>
   );
 }
+

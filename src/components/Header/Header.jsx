@@ -23,17 +23,29 @@ export default function Header() {
           <nav className="site-nav-container" aria-label="Primary">
             <ul className="site-nav">
               {NAV_LINKS.map((link) => {
-                const targetPath = isHome ? link.href : `/${link.href}`;
-                const isActive = isHome && link.href === '#home';
+                const isRoute = link.href.startsWith('/');
+                const targetPath = isRoute ? link.href : isHome ? link.href : `/${link.href}`;
+                const isActive = isRoute
+                  ? location.pathname === link.href
+                  : isHome && link.href === '#home';
 
                 return (
                   <li key={link.href}>
-                    <a
-                      href={targetPath}
-                      className={`site-nav__link ${isActive ? 'site-nav__link--active' : ''}`}
-                    >
-                      {link.label}
-                    </a>
+                    {isRoute ? (
+                      <Link
+                        to={link.href}
+                        className={`site-nav__link ${isActive ? 'site-nav__link--active' : ''}`}
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={targetPath}
+                        className={`site-nav__link ${isActive ? 'site-nav__link--active' : ''}`}
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 );
               })}
@@ -41,10 +53,11 @@ export default function Header() {
           </nav>
 
           <div className="site-header__actions">
-            <a
-              href={isHome ? '#creators' : '/#creators'}
+            <Link
+              to="/briefs"
               className="site-header__icon-btn"
-              aria-label="Search creators and briefs"
+              aria-label="Search open creative briefs"
+              title="Open Creative Briefs"
             >
               <svg
                 className="site-header__search-icon"
@@ -66,15 +79,22 @@ export default function Header() {
                   strokeLinecap="round"
                 />
               </svg>
-            </a>
+            </Link>
 
-            <a href={isHome ? '#about' : '/#about'} className="site-header__btn site-header__btn--primary">
+            <Link to="/briefs/new" className="site-header__btn site-header__btn--primary">
               Post a Brief
-            </a>
+            </Link>
+
+            <Link to="/dashboard/brand" className="site-header__btn site-header__btn--secondary">
+              Brand Studio
+            </Link>
 
             {user ? (
-              <Link to="/dashboard" className="site-header__btn site-header__btn--secondary">
-                Dashboard
+              <Link
+                to={user.role === 'brand' ? '/dashboard/brand' : '/dashboard'}
+                className="site-header__btn site-header__btn--secondary"
+              >
+                {user.role === 'brand' ? 'Brand Workspace' : 'Creator Studio'}
               </Link>
             ) : (
               <button
