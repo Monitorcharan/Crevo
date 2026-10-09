@@ -1,0 +1,298 @@
+.creator-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+/* 1. Search Bar Row */
+.creator-filters__search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.creator-filters__search-input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 18rem;
+  display: flex;
+  align-items: center;
+}
+
+.creator-filters__search-icon {
+  position: absolute;
+  left: 1.15rem;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--color-accent);
+  pointer-events: none;
+}
+
+.creator-filters__search-input {
+  width: 100%;
+  height: 3.25rem;
+  padding-left: 3.2rem;
+  padding-right: 2.75rem;
+  background: #11091e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: #ffffff;
+  outline: none;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.creator-filters__search-input::placeholder {
+  color: rgba(242, 239, 233, 0.45);
+}
+
+.creator-filters__search-input:focus {
+  border-color: var(--color-accent);
+  background: #160c26;
+  box-shadow: 0 0 20px rgba(184, 166, 255, 0.2);
+}
+
+.creator-filters__clear-search {
+  position: absolute;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color var(--dur-fast);
+}
+
+.creator-filters__clear-search:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.creator-filters__clear-search svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+/* Filters Toggle Button */
+.creator-filters__toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 3.25rem;
+  padding: 0 1.25rem;
+  border-radius: var(--radius-pill);
+  background: #11091e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(242, 239, 233, 0.85);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.creator-filters__toggle-btn:hover,
+.creator-filters__toggle-btn--active {
+  background: #190e2c;
+  border-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.creator-filters__toggle-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.creator-filters__active-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+/* Sort Select Wrapper */
+.creator-filters__sort-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 3.25rem;
+  padding-inline: 1rem 0.5rem;
+  border-radius: var(--radius-pill);
+  background: #11091e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.creator-filters__sort-label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+/* 2. Category Chips Bar */
+.creator-filters__categories {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.creator-filters__categories::-webkit-scrollbar {
+  display: none;
+}
+
+.creator-filters__category-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.15rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(242, 239, 233, 0.75);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.creator-filters__category-chip:hover {
+  background: rgba(184, 166, 255, 0.08);
+  border-color: rgba(184, 166, 255, 0.25);
+  color: #ffffff;
+}
+
+.creator-filters__category-chip--active {
+  background: #bfaaff;
+  color: #0b0518 !important;
+  border-color: #bfaaff;
+  font-weight: 600;
+  box-shadow: 0 0 16px rgba(191, 170, 255, 0.35);
+}
+
+/* 3. Advanced Grid */
+.creator-filters__advanced-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1rem;
+  padding: 1.25rem;
+  background: #0f081c;
+  border: 1px solid rgba(184, 166, 255, 0.15);
+  border-radius: var(--radius-md);
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.creator-filters__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.creator-filters__field-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+.creator-filters__select {
+  height: 2.75rem;
+  padding: 0 1rem;
+  border-radius: var(--radius-sm);
+  background: #180e2b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--dur-fast);
+}
+
+.creator-filters__select:focus {
+  border-color: var(--color-accent);
+}
+
+.creator-filters__select--sort {
+  height: auto;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* 4. Status Bar */
+.creator-filters__status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  padding-top: 0.25rem;
+}
+
+.creator-filters__count strong {
+  color: #ffffff;
+}
+
+.creator-filters__reset-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-accent);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast);
+}
+
+.creator-filters__reset-btn:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .creator-filters__search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .creator-filters__search-input-wrapper {
+    min-width: 100%;
+  }
+
+  .creator-filters__toggle-btn,
+  .creator-filters__sort-wrapper {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
